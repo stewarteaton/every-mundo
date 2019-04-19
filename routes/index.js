@@ -141,20 +141,17 @@ router.post('/searchPost', function(req, res) {
             jsonReturned = JSON.parse(xhr.responseText);
 
 
-            data = jsonReturned[0].routes;
-            data2 = jsonReturned[1].routes;
-            console.log("This is : "+data[0].arrivalTime);
+            var data = jsonReturned[0].routes;
+          
+            // console.log("This is : "+data[0].arrivalTime);
   
             //declare string to hold flight duration
             var duration = [];
-            var duration2 = [];
-            var counter = 0; var counter2 =0;
+            var counter = 0; 
             for(key in data) {
                 counter = counter +1;
              };
-            for(key in data2) {
-              counter2 = counter2 +1;
-            }
+
              
             //Create flight duration variable and append to array
             for(i = 0; i<counter; i++){
@@ -170,29 +167,40 @@ router.post('/searchPost', function(req, res) {
               //convert to minutes
               duration.push(x);
             };
-            //same but for return flights
-            for(i = 0; i<counter2; i++){
-              var arrival = data2[i].arrivalTime;
-                arrival = arrival.replace(/:/g, '.');
-                arrival = parseFloat(arrival);
-              var depart =  data2[i].departureTime;
-                depart = depart.replace(/:/g, '.');
-                depart = parseFloat(depart);
-              var x = arrival - depart;
-              //round to hundredths place
-              x = Math.ceil(x*100)/100;
-              //convert to minutes
-              duration2.push(x);
-            };
-
             //add duration to js object departs
             for(i=0; i<counter; i++){
               jsonReturned[0].routes[i].duration = duration[i];
             };
-            //add duratino array to js objec returns
-            for(i=0; i<counter2; i++){
-              jsonReturned[1].routes[i].duration = duration2[i]
-            };
+
+
+            //if round trip, get duration of returning flights
+            var duration2 = [];
+            var counter2 =0;
+            if(!isOneWay){
+              data2 = jsonReturned[1].routes;
+              for(key in data2) {
+                counter2 = counter2 +1;
+              }
+              //  creater flight duration varibale append to array
+              for(i = 0; i<counter2; i++){
+                var arrival = data2[i].arrivalTime;
+                arrival = arrival.replace(/:/g, '.');
+                arrival = parseFloat(arrival);
+                 var depart =  data2[i].departureTime;
+                depart = depart.replace(/:/g, '.');
+                depart = parseFloat(depart);
+                var x = arrival - depart;
+                //round to hundredths place
+                x = Math.ceil(x*100)/100;
+                //convert to minutes
+                duration2.push(x);
+              };
+
+                //add duration array to js objec returns
+                 for(i=0; i<counter2; i++){
+                  jsonReturned[1].routes[i].duration = duration2[i]
+               };
+            }
 
             //pass stringified json for purpose of passing to sorted function upon click
             var objJsonStr = JSON.stringify(jsonReturned);
