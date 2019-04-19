@@ -1,0 +1,75 @@
+extends layout
+
+block content
+  .searchForm_wrapper
+    h1= title
+
+    .search_nav
+        form(action="/searchPost" method="POST" enctype="application/json" class="homePageForm" )
+          .input_button_wrapper
+            .radio_container
+                .input_radio
+                    label(for="tripType" class="radioLabel") One Way
+                    input(type="radio" name="tripType" value="1" onclick='toggleReturn()' checked=isOneWay==true) 
+                .input_radio
+                    label(for="tripType" class="radioLabel") Round Trip
+                    input(type="radio" name="tripType" value="2" onclick='toggleReturn()' checked=isOneWay==false) 
+            .input_wrapper
+              label(for="origin") From
+              input(type="text" id="origin" name="origin" required value= origin)
+            .input_wrapper
+              label(for="destination") To
+              input(type="text" id="destination" name="destination" required value= destination)
+            .input_wrapper
+              label(for="departureDate") Depart (mm-dd-yyyy)
+              input(type="date" id="departureDate" name="departureDate" min= datMin max="25/07/2022" required pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}" value= departureDate)
+            //-   input(type="text" id="departureDate" name="departureDate" min= datMin max="01/25/2025" required value= departureDate)
+            .input_wrapper
+              if !isOneWay
+                label(for="returnDate" id="returnDateLabel") Return 
+                input(type="date" id="returnDate" name="returnDate" class="" required value= returnDate)
+              else
+                label(for="returnDateX") Return 
+                input(type="date" id="returnDateX" name="returnDateX" class="hide_display" readonly="readonly")
+            .input_wrapper
+              label(for="passengerCount") Passenger(s)
+              input(type="number" step="1" min="1" max="9" name="passengerCount" required value="1")
+            .input_wrapper
+              label(for="promoCode") Promo Code
+              input(type="text"  name="passengerCount" value="")
+
+          .button_wrapper
+            .input_wrapper
+                button.letsGoButton(type="submit") Search!
+
+
+
+
+
+    //- form(action="" method="POST" enctype="multipart/form-data")
+    //-     .form_container
+    //-         .col_0
+    //-             .form_input
+    //-                 label(for="oneWay") One Way:
+    //-                 input(type="radio" id="oneWay" name="radioBtn" value="true" checked)  
+    //-                 label(for="roundTrip") Round Trip:
+    //-                 input(type="radio" id="roundTrip" name="radioBtn" value="false")
+    //-             .form_input
+    //-                 label(for="origin") From:
+    //-                 .form-control
+    //-                     input(type="text" name="origin" required value= origin )
+    //-             .form-group
+    //-                 label(for="depart") Depart:
+    //-                 .form-control
+    //-                     input(type="date" name="depart" required value= "" )
+    //-         .col_1
+    //-             .form-group
+    //-                 label(for="destination") To:
+    //-                 input(type="text" name="destination" required value= destination)
+    //-             .form-group
+    //-                 label(for="return") Return:
+    //-                 input(type="date" name="return"  value= "" )
+
+    //-     .form_input 
+    //-         button(type="submit" class="button_small") CONFIRM
+

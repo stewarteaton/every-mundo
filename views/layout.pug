@@ -1,0 +1,52 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
+    script.
+      //Toggle return date box in home page by change in radio button 
+      var toggleReturnIndex = function() {
+          var returnDate = document.getElementById("returnDate");
+          var returnDateAttr = document.getElementById("returnDate").getAttribute("value");;
+          var returnDateStyle = returnDate.style.backgroundColor;
+          if (returnDateStyle == "grey"){
+            document.getElementById("returnDate").style.backgroundColor = "white";
+            document.getElementById("returnDate").removeAttribute("readonly");
+          } else {
+            document.getElementById("returnDate").setAttribute("readonly", "readonly");
+            document.getElementById("returnDate").style.backgroundColor = "grey";
+          }
+      }
+      //toggle return date box in search form page
+      var toggleReturn = function() {
+          //- alert("function clicked");
+          var returnDateInput = document.getElementById("returnDate");
+          //- alert(returnDateInput);
+            if (returnDateInput.style.display === "none") {
+               returnDateInput.style.display = "block";
+               returnDateLabel.style.display = "block";
+              } else {
+                  //- alert("change style to none");
+                  returnDateInput.style.display = "none";
+                  returnDateInput.style.value = "";
+                  returnDateLabel.style.display = "none";
+              }
+      }
+  
+  header
+    nav
+      a(href="/")
+        h1#logo(class="logoLink") Every Mundo
+        //- ul
+        //-   li
+        //-     a(href="/") Sign Up
+        //-   li 
+        //-     a(href="/") Login
+
+
+
+
+
+    block content
+

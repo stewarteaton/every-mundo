@@ -1,0 +1,46 @@
+extends layout
+
+block content
+  .outer_wrapper
+    h1 Available Flights One Way
+    h1= title
+    
+  .results_wrapper
+    .date_wrapper
+        .detail_wrapper
+            h2= flightsTo.origin +" to "+ flightsTo.destination
+            h3= flightsTo.departureDate
+        .sort_wrapper
+            h2 Sort By
+            a(href=`/sortResults/0/${jsonBase64}`) 
+                h4 Sort by Price (low - high)
+            a(href=`/sortResults/1/${jsonBase64}`) 
+                h4 Sort by Price (high - low)
+            a(href=`/sortResults/2/${jsonBase64}`) 
+                h4 Sort by Time (low - high)
+            a(href=`/sortResults/3/${jsonBase64}`) 
+                h4 Sort by Duration (low -high)
+
+    .column_info
+        .route_column
+            h2 Depart
+        .route_column
+            .duration_display
+                h2 Duration
+        .route_column
+            h2 Arrival
+        .route_column
+            h2 Price
+    each route in flightsTo.routes
+        .route_wrapper
+            .route_column
+                h4= flightsTo.origin
+                h2= route.departureTime
+            .route_column
+                .duration_display
+                 h3= route.duration+" hrs"
+            .route_column
+                h4= flightsTo.destination
+                h2= route.arrivalTime
+            .route_column
+                h2= "$ " +route.priceUSD

@@ -1,0 +1,26 @@
+{
+  "name": "everymundoexp",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www",
+    "devstart": "nodemon ./bin/www"
+  },
+  "dependencies": {
+    "atob": "^2.1.2",
+    "body-parser": "^1.18.3",
+    "cookie-parser": "~1.4.3",
+    "crypto-js": "^3.1.9-1",
+    "debug": "~2.6.9",
+    "dotenv": "^7.0.0",
+    "expres": "0.0.5",
+    "express": "~4.16.0",
+    "http-errors": "~1.6.2",
+    "morgan": "~1.9.0",
+    "nodemon": "^1.18.11",
+    "pug": "2.0.0-beta11",
+    "request": "^2.88.0",
+    "utf8": "^3.0.0",
+    "xmlhttprequest": "^1.8.0"
+  }
+}

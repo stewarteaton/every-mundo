@@ -1,0 +1,133 @@
+extends layout
+
+block content
+  .outer_wrapper
+    h1 Available Flights Round Trip
+    h1= title
+
+  .results_wrapper
+    .date_wrapper
+        .detail_wrapper
+            h2= flightsTo.origin +" to "+ flightsTo.destination
+            h3= flightsTo.departureDate
+        .sort_wrapper
+            h2 Sort By
+            a(href=`/sortResultsRoundTrip/0/${jsonBase64}`) 
+                h4 Sort Price (low - high)
+            a(href=`/sortResultsRoundTrip/1/${jsonBase64}`) 
+                h4 Sort Price (high - low)
+            a(href=`/sortResultsRoundTrip/2/${jsonBase64}`) 
+                h4 Sort by Arrival Time (early - late)
+            a(href=`/sortResultsRoundTrip/3/${jsonBase64}`) 
+                h4 Sort by Duration (short - long)
+    .column_info
+        .route_column
+            h2 Depart
+        .route_column
+            .duration_display
+                h2 Duration
+        .route_column
+            h2 Arrival
+        .route_column
+            h2 Price
+    each route in flightsTo.routes
+        .route_wrapper
+            .route_column
+                h4= flightsTo.origin
+                h2= route.departureTime
+            .route_column
+                .duration_display
+                    h3= route.duration + " hrs"
+            .route_column
+                h4= flightsTo.destination
+                h2= route.arrivalTime
+            .route_column
+                h2= "$ "+route.priceUSD
+    //- List Return Flights if Round Trip
+  .results_wrapper
+    .date_wrapper
+        .detail_wrapper
+            h2= flightsFrom.origin +" to "+ flightsFrom.destination
+            h3= flightsFrom.departureDate
+    .column_info
+        .route_column
+            h2 Depart
+        .route_column
+            .duration_display
+                h2 Duration
+        .route_column
+            h2 Arrival
+        .route_column
+            h2 Price
+    each route in flightsFrom.routes
+        .route_wrapper
+            .route_column
+                h4= flightsFrom.origin
+                h2= route.departureTime
+            .route_column
+                .duration_display
+                    h3= route.duration + " hrs"
+            .route_column
+                h4= flightsFrom.destination
+                h2= route.arrivalTime
+            .route_column
+                h2= "$ "+route.priceUSD
+
+
+//-   .results_wrapper
+//-     .date_wrapper
+//-         h2= flightsTo.origin +" to "+ flightsTo.destination
+//-         h3= flightsTo.departureDate
+//-         .sort_wrapper
+//-             h2 Sort By
+//-             a(href=`/sortResultsRoundTrip/0/${jsonBase64}`) 
+//-                 h3 Sort Price (low - high)
+//-             a(href=`/sortResultsRoundTrip/1/${jsonBase64}`) 
+//-                 h3 Sort Price (high - low)
+//-             a(href=`/sortResultsRoundTrip/2/${jsonBase64}`) 
+//-                 h3 Sort by Arrival Time
+//-             a(href=`/sortResultsRoundTrip/3/${jsonBase64}`) 
+//-                 h3 Sort by Departure Time
+//-     .column_info
+//-         .route_column
+//-             h2 Depart
+//-         .route_column
+//-             h2 Price
+//-         .route_column
+//-             h2 Arrival
+//-     each route in flightsTo.routes
+//-         .route_wrapper
+//-             .route_column
+//-                 h4= flightsTo.origin
+//-                 h2= route.departureTime
+//-             .route_column
+//-                 h3= "$ "+route.priceUSD
+//-             .route_column
+//-                 h4= flightsTo.destination
+//-                 h2= route.arrivalTime
+//-     //- List Return Flights if Round Trip
+//-   .results_wrapper
+//-     .date_wrapper
+//-         h2= flightsFrom.origin +" to "+ flightsFrom.destination
+//-         h3= flightsFrom.departureDate
+//-     .column_info
+//-         .route_column
+//-             h2 Depart
+//-         .route_column
+//-             h2 Price
+//-         .route_column
+//-             h2 Arrival
+//-     each route in flightsFrom.routes
+//-         .route_wrapper
+//-             .route_column
+//-                 h4= flightsFrom.origin
+//-                 h2= route.departureTime
+//-             .route_column
+//-                 h3= "$ "+route.priceUSD
+//-             .route_column
+//-                 h4= flightsFrom.destination
+//-                 h2= route.arrivalTime
+
+
+    
+                
